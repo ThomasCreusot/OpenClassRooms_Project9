@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>The Reviews Project</title>
+        <link rel="stylesheet" href="{% static './styles.css' %}" />
+    </head>
+
+    <body>
+
+        <header>
+        <div></div> <!--div for spacing with flexbox-->
+        <p>LiTReview</p>
+        <div>
+        {%  if user.is_authenticated %}
+            <p>Flux</p>
+            <p>Posts</p>
+            <p>Abonnements</p>
+            <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+        {% endif %}
+        </div>
+        </header>
+
+        {% block content %}{% endblock content %}
+    </body>
+</html>

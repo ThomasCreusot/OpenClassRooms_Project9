@@ -16,6 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+import authentication_app.views
+import reviews_app.views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # Path for view based on function
+    # path('', authentication_app.views.login_page, name='login'), #Perso : '' because at root the of the project
+    # Path for view based on class
+    path('', authentication_app.views.LoginPageView.as_view(), name='login'),
+
+    path('logout/', authentication_app.views.logout_user, name='logout'),
+    path('home/', reviews_app.views.home, name='home'),
 ]

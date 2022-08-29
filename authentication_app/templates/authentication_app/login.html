@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="homepage">
+
+    <div></div> <!--div for spacing with flexbox-->
+    <div id="homepage__signup">
+        <p>Inscrivez-vous maintenant</p>
+        <button type="submit" >S'inscrire</button>
+    </div>
+
+    <div id="homepage__login">
+        <p>Connectez-vous</p>
+        <p>{{ message }}</p>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Se connecter</button>
+        </form>
+    </div>
+    <div></div> <!--div for spacing with flexbox-->
+</div> <!--homepagediv-->
+{% endblock content %}
