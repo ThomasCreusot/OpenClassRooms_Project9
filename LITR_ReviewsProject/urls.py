@@ -29,4 +29,5 @@ urlpatterns = [
 
     path('logout/', authentication_app.views.logout_user, name='logout'),
     path('home/', reviews_app.views.home, name='home'),
+    path('signup/', authentication_app.views.signup_page, name='signup'),
 ]

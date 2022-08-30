@@ -64,3 +64,16 @@ header
     border-color:  rgb(100,100,100);
     border-style: solid;
 }
+
+
+
+/*==============================*/
+/*========== TEST ON FORMS ==========*/
+.helptext
+{
+    /*Display borders for testing*/
+    border-width: 2px;
+    border-color:  rgb(252, 0, 0);
+    border-style: solid;
+}
+

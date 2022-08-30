@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from . import forms
 from django.contrib.auth import login, authenticate, logout
-
 from django.views.generic import View
+from django.conf import settings  # access to LOGIN_REDIRECT_URL
+
+
 
 # Create your views here.
 
@@ -57,3 +59,13 @@ def logout_user(request):
     return redirect('login')
 
 
+def signup_page(request):
+    form = forms.SignupForm()
+    if request.method == 'POST':
+        form = forms.SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # auto-login user
+            login(request, user)
+            return redirect(settings.LOGIN_REDIRECT_URL)
+    return render(request, 'authentication_app/signup.html', context={'form': form})

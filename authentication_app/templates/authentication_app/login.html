@@ -4,21 +4,28 @@
 
 <div id="homepage">
 
-    <div></div> <!--div for spacing with flexbox-->
-    <div id="homepage__signup">
-        <p>Inscrivez-vous maintenant</p>
-        <button type="submit" >S'inscrire</button>
-    </div>
+    <!--Not mandatory : if the user is already authenticated, he/she does not have access to signup and login-->
+    {% if user.is_authenticated %}
+        <p>Bonjour {{ user.username }}, vous êtes déja connectés, Merci de revenir à la page d'accueil</p>
+        <button><a href="{% url 'home' %}">Accueil</a></button>
 
-    <div id="homepage__login">
-        <p>Connectez-vous</p>
-        <p>{{ message }}</p>
-        <form method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button type="submit" >Se connecter</button>
-        </form>
-    </div>
-    <div></div> <!--div for spacing with flexbox-->
+    {% else %}
+        <div></div> <!--div for spacing with flexbox-->
+        <div id="homepage__signup">
+            <p>Inscrivez-vous maintenant</p>
+            <button><a href="{% url 'signup' %}">S'inscrire</a></button>
+        </div>
+
+        <div id="homepage__login">
+            <p>Connectez-vous</p>
+            <p>{{ message }}</p>
+            <form method="post">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit" >Se connecter</button>
+            </form>
+        </div>
+        <div></div> <!--div for spacing with flexbox-->
+    {% endif %}
 </div> <!--homepagediv-->
 {% endblock content %}
