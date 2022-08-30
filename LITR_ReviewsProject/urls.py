@@ -28,6 +28,9 @@ urlpatterns = [
     path('', authentication_app.views.LoginPageView.as_view(), name='login'),
 
     path('logout/', authentication_app.views.logout_user, name='logout'),
-    path('home/', reviews_app.views.home, name='home'),
     path('signup/', authentication_app.views.signup_page, name='signup'),
+
+    path('home/', reviews_app.views.home, name='home'),
+    path('tickets/add/', reviews_app.views.ticket_create, name='ticket-create'),
+    path('reviews/add/', reviews_app.views.review_create, name='review-create'),
 ]

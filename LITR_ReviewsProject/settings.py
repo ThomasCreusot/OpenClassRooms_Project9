@@ -139,3 +139,6 @@ STATICFILES_DIRS = [
 LOGIN_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
+
+#a ajouter pour les photos : MEDIA_URL = '/media/'
+#a ajouter pour les photos : MEDIA_ROOT = 'media/'
