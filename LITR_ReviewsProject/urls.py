@@ -33,4 +33,5 @@ urlpatterns = [
     path('home/', reviews_app.views.home, name='home'),
     path('tickets/add/', reviews_app.views.ticket_create, name='ticket-create'),
     path('reviews/add/', reviews_app.views.review_create, name='review-create'),
+    path('reviews_and_tickets/add', reviews_app.views.review_and_ticket_upload, name='review_and_ticket-create'),
 ]

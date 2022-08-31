@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
- <h1>Créer une nouvelle review</h1>
-<form action="" method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Envoyer">
-</form>
+    <h1>Créer une nouvelle review</h1>
+    <p>Commentaire : j'ai supprimé le bouton ou on choisi un ticket, lors de la construction de review_and_ticket.html</p>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Envoyer">
+    </form>
+    <button><a href="{% url 'home' %}">Retour</a></button>    
 {% endblock %}

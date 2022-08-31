@@ -2,4 +2,12 @@
 
 {% block content %}
     <p>Vous êtes connecté !</p>
+
+    <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
+    <button><a href="{% url 'review-create' %}">Créer une critique seule: bouton destiné à disparaitre</a></button>    
+    <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
+
+
+
+    <p>ICI : le flux</p>
 {% endblock content %}
