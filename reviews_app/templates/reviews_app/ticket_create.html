@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Créer un nouveau ticket</h1>
-    <form action="" method="post" novalidate>
-        {% csrf_token %}
+    <form method="post" enctype="multipart/form-data">
         {{ form.as_p }}
+        {% csrf_token %}
         <input type="submit" value="Envoyer">
     </form>
     <button><a href="{% url 'home' %}">Retour</a></button>    
 {% endblock %}
+
+

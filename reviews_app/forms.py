@@ -16,3 +16,10 @@ class ReviewForm(forms.ModelForm):
      # exclusion of user field, as it is the connected user by default (see views.py) 
      #fields = '__all__'
      exclude = ('user', 'ticket',)
+
+"""
+class DisplayTicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = '__all__'
+"""

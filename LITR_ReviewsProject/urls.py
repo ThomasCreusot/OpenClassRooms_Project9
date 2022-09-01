@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# For pictures display
+from django.conf import settings
+from django.conf.urls.static import static
+
 import authentication_app.views
 import reviews_app.views
 
@@ -35,3 +39,8 @@ urlpatterns = [
     path('reviews/add/', reviews_app.views.review_create, name='review-create'),
     path('reviews_and_tickets/add', reviews_app.views.review_and_ticket_upload, name='review_and_ticket-create'),
 ]
+
+
+# This method is only adapted to a development environment ; for production : web server
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
