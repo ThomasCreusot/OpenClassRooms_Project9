@@ -55,8 +55,12 @@
                     <img src="{{ instance.image.url }}">
                 {% endif %}
 
-                <button><a href="{% url 'home' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
+                {% if instance in tickets_without_review %}
+                    <button><a href="{% url 'home' %}">Créer une critique</a></button>    
+                {% endif %}
             </div>
+
+
 
         {% elif instance|model_type == 'Review' %}
             <div class="review">

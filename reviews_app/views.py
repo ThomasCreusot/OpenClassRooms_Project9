@@ -12,24 +12,37 @@ from django.db.models import Q
 
 # Create your views here.
 
+
+
+#UTILISER Q OBJECTS ICI POUR COMBINER L'EXCLUSION DES TICKETS ASSOCIES A DES REVIEWS ET UNE AUTRE CONDITION (relation avec user par exemple)
+
 @login_required
 def home(request):
     reviews = models.Review.objects.all()
-    # exclusion of tickets already associated to a review with __in (field name + __ + in)
-    tickets = models.Ticket.objects.all().exclude(
-        review__in=reviews
+    tickets = models.Ticket.objects.all()
+
+    # We keep only ticket associated to a review
+    #tickets_within_a_review = models.Ticket.objects.all().exclude(
+    #    review__in=reviews
+    #)
+
+    # We keep only ticket not associated to a review
+    # exclusion of tickets already associated to a review with __in (field name + __ + in) : without button in HTML
+    tickets_without_review = models.Ticket.objects.filter(
+        ~Q(review__in=reviews)  # ~ : NOT
     )
-    
+
     #context = {
     #    'tickets': tickets, 
     #    'reviews': reviews
     #}
     tickets_and_reviews = sorted(
+        # itertools.chain: group of querysets --> python: sorted() 
         chain(tickets, reviews),
         key=lambda instance: instance.time_created,
         reverse=True
     )
-    context = {'tickets_and_reviews': tickets_and_reviews,}
+    context = {'tickets_and_reviews': tickets_and_reviews, 'tickets_without_review':tickets_without_review}
     return render(request, 'reviews_app/home.html', context=context)
 
 
