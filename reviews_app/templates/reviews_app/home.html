@@ -5,11 +5,14 @@
 
 {% block content %}
 
-    <p>Vous êtes connecté !</p>
+    <p>Vous êtes connecté en tant que {{ user.username }}</p>
+
+    <p>Vous suivez : {{ user.follows }}</p>
 
     <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
     <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
 
+    <button><a href="{% url 'follow_users' %}">follow_users</a></button>
 
     <p>ICI : le flux</p>
 

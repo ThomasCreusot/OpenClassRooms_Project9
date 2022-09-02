@@ -3,7 +3,7 @@ from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from reviews_app.forms import TicketForm, ReviewForm
+from reviews_app.forms import TicketForm, ReviewForm, FollowUsersForm
 
 # Feed creation (flux)
 from . import models
@@ -18,8 +18,21 @@ from django.db.models import Q
 
 @login_required
 def home(request):
-    reviews = models.Review.objects.all()
-    tickets = models.Ticket.objects.all()
+    #LIMITER LES TICKETS AFFICHES A CEUX DES UTILISATEURS SUIVIS
+    #code originel
+    #reviews = models.Review.objects.all()
+    reviews = models.Review.objects.filter(
+        Q(user__in=request.user.follows.all()) 
+    )
+
+    #LIMITER LES TICKETS AFFICHES A CEUX DES UTILISATEURS SUIVIS
+    #code originel
+    #tickets = models.Ticket.objects.all()
+    tickets = models.Ticket.objects.filter(
+        Q(user__in=request.user.follows.all()) 
+    )
+
+
 
     # We keep only ticket associated to a review
     #tickets_within_a_review = models.Ticket.objects.all().exclude(
@@ -155,5 +168,22 @@ def review_for_a_given_ticket_create(request, ticket_id):
     return render(request,
             'reviews_app/review_create_for_a_ticket.html',
             {'form': form})
+
+
+
+#View about following.
+#ajouter : user.follows.add(choixDeUserDansLaListe)
+#pas besoin d’un through_defaults={‘aaa': ‘blablabla’}) etant donné qu’on a pas encore d’information sur la relation
+#Ou alors user.followed_user mais je pense pas
+
+@login_required
+def follow_users(request):
+    form = FollowUsersForm(instance=request.user)
+    if request.method == 'POST':
+        form = FollowUsersForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'reviews_app/follow_users_form.html', context={'form': form})
 
 

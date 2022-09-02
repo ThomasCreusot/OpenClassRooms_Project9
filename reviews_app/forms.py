@@ -1,6 +1,8 @@
 from django import forms
 from reviews_app.models import Ticket, Review
 
+from django.contrib.auth import get_user_model 
+
 
 class TicketForm(forms.ModelForm):
    class Meta:
@@ -23,3 +25,9 @@ class DisplayTicketForm(forms.ModelForm):
         model = Ticket
         fields = '__all__'
 """
+
+User = get_user_model()
+class FollowUsersForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['follows']
