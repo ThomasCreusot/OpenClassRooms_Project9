@@ -14,8 +14,11 @@ from django.db.models import Q
 
 @login_required
 def home(request):
-    tickets = models.Ticket.objects.all()
     reviews = models.Review.objects.all()
+    # exclusion of tickets already associated to a review with __in (field name + __ + in)
+    tickets = models.Ticket.objects.all().exclude(
+        review__in=reviews
+    )
     
     #context = {
     #    'tickets': tickets, 

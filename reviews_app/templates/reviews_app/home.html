@@ -52,7 +52,7 @@
                 <p>{{ instance.title }} lalala</p>
                 <p>{{ instance.description }}</p>
                 {% if instance.image %}
-                    <img src="{{ ticket.image.url }}">
+                    <img src="{{ instance.image.url }}">
                 {% endif %}
 
                 <button><a href="{% url 'home' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
