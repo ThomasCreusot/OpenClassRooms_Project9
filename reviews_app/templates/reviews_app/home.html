@@ -8,7 +8,6 @@
     <p>Vous êtes connecté !</p>
 
     <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
-    <button><a href="{% url 'review-create' %}">Créer une critique seule: bouton destiné à disparaitre et a etre transféré au niveau de l'affichage d'un ticket dans le flux; il faudra ensuite 'connecter' l'id du ticket sur lequel on a cliqué avec l'id du ticket lié à la review</a></button>    
     <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
 
 
@@ -56,7 +55,7 @@
                 {% endif %}
 
                 {% if instance in tickets_without_review %}
-                    <button><a href="{% url 'home' %}">Créer une critique</a></button>    
+                    <button><a href="{% url 'review-create-for-a-ticket' instance.id %}">Créer une critique</a></button>    
                 {% endif %}
             </div>
 

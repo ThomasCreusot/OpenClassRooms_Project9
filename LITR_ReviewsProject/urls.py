@@ -38,6 +38,8 @@ urlpatterns = [
     path('tickets/add/', reviews_app.views.ticket_create, name='ticket-create'),
     path('reviews/add/', reviews_app.views.review_create, name='review-create'),
     path('reviews_and_tickets/add', reviews_app.views.review_and_ticket_upload, name='review_and_ticket-create'),
+
+    path('reviews/add_for_a_given_ticket/<int:ticket_id>', reviews_app.views.review_for_a_given_ticket_create, name='review-create-for-a-ticket'),
 ]
 
 

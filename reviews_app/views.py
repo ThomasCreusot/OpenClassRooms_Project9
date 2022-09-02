@@ -46,14 +46,14 @@ def home(request):
     return render(request, 'reviews_app/home.html', context=context)
 
 
-
+'''
 @login_required
 def review_create(request):
    form = ReviewForm()
    return render(request,
             'reviews_app/review_create.html',
             {'form': form})
-
+'''
 
 @login_required
 def ticket_create(request):
@@ -100,6 +100,8 @@ def review_create(request):
             'reviews_app/review_create.html',
             {'form': form})
 
+
+
 # blog <=> review et photo <=> ticket 
 @login_required
 def review_and_ticket_upload(request):
@@ -110,7 +112,7 @@ def review_and_ticket_upload(request):
         review_form = ReviewForm(request.POST)
         ticket_form = TicketForm(request.POST, request.FILES)
         if all([review_form.is_valid(), ticket_form.is_valid()]):
-            # inversion car on save d'abord le ticket
+            # inversion because we save the ticket before the reviewe
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()
@@ -125,3 +127,33 @@ def review_and_ticket_upload(request):
         'ticket_form': ticket_form,
     }
     return render(request, 'reviews_app/review_and_ticket_create.html', context=context)
+
+
+
+@login_required
+def review_for_a_given_ticket_create(request, ticket_id):
+    ticket = models.Ticket.objects.get(id=ticket_id)  
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+
+            # New instance but without saving in database, in order to attribute the user to the ForeignKey
+            review = form.save(commit=False)
+            # set the connected user to the user before saving the model
+            review.user = request.user
+            # set the ticket before saving the model
+            review.ticket = ticket
+            # Save
+            review.save()
+
+            # redirige vers la page de détail du groupe que nous venons de créer
+            # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            return redirect('home') # , band.id)
+    else:
+        form = ReviewForm()
+    return render(request,
+            'reviews_app/review_create_for_a_ticket.html',
+            {'form': form})
+
+
