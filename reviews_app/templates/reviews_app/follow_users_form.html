@@ -5,8 +5,21 @@
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit" >Confirmer</button>
-        
+        <button type="submit" >Envoyer</button>
+
+        <p>Abonnements : devrait en avoir plusieurs, ma table many to many ne marche donc pas.</p>
+        {{subscriptions}}
+        <br>
+        <p>Abonnés ERREUR dans le view, ne marche pas </p>
+        {{subscribers}}
+
+
+        <p>all_users</p>
+        {{all_users}}
+
+        <button><a href="{% url 'home' %}">Retour</a></button>    
     </form>
 
     {% endblock content %}
+
+

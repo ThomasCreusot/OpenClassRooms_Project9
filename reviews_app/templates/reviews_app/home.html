@@ -7,6 +7,7 @@
 
     <p>Vous êtes connecté en tant que {{ user.username }}</p>
 
+    <p>Code {{ user.follows }} --> dans la vue; renvoyer via le contexte ; et ajouter .all()</p>
     <p>Vous suivez : {{ user.follows }}</p>
 
     <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
