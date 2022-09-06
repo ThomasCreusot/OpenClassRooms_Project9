@@ -215,11 +215,17 @@ def follow_users(request):
     # all Users : 
     # subscribers = User.objects.all()
 
-    subscribers = User.objects.filter(
-        Q(followed_by__in=str(request.user.id))  # other solution with xxx_set.all() ? https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
-        )
 
+    #subscribers = User.objects.filter(
+    #    Q(followed_by__in=str(request.user.id))  # other solution with xxx_set.all() ? https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
+    #    )
+    subscribers = User.objects.filter(follows=request.user)
 
+    #subscribers = User.objects.filter(
+    #    Q(follows__in=str(request.user.id))  # other solution with xxx_set.all() ? https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
+    #    )
+    #print("aze", str(request.user.id))
+    #print(subscribers)
 
     all_users = User.objects.all()
 
