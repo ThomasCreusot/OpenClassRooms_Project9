@@ -20,7 +20,7 @@
 
 
                 <button><a href="{% url 'ticket-update' instance.id %}">Modifier</a></button>    
-                <button><a href="{% url 'home' %}">Supprimer</a></button>    
+                <button><a href="{% url 'ticket-delete' instance.id %}">Supprimer</a></button>    
             </div>
 
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <button><a href="{% url 'review-update' instance.id %}">Modifier</a></button>    
-                <button><a href="{% url 'home' %}">Supprimer</a></button>    
+                <button><a href="{% url 'review-delete' instance.id %}">Supprimer</a></button>    
             </div>
         {% endif %}
     <br>

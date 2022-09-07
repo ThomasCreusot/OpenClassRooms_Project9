@@ -37,21 +37,18 @@ urlpatterns = [
     path('home/', reviews_app.views.home, name='home'),
     path('my_posts/', reviews_app.views.my_posts, name='my-posts'),
 
-
     path('tickets/add/', reviews_app.views.ticket_create, name='ticket-create'),
-
     path('reviews_and_tickets/add', reviews_app.views.review_and_ticket_upload, name='review_and_ticket-create'),
-
     path('reviews/add_for_a_given_ticket/<int:ticket_id>', reviews_app.views.review_for_a_given_ticket_create, name='review-create-for-a-ticket'),
-
-
-
-    path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
-
-    path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
 
     path('tickets/update/<int:ticket_id>/', reviews_app.views.ticket_update, name='ticket-update'),
     path('reviews/update/<int:review_id>/', reviews_app.views.review_update, name='review-update'),
+
+    path('tickets/delete/<int:ticket_id>/', reviews_app.views.ticket_delete, name='ticket-delete'),
+    path('reviews/delete/<int:review_id>/', reviews_app.views.review_delete, name='review-delete'),
+
+
+    path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
 
 ]
 

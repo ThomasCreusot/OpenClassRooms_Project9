@@ -293,7 +293,7 @@ def ticket_update(request, ticket_id):
     ticket = models.Ticket.objects.get(id=ticket_id)  
 
     if request.method == 'POST':
-        form = TicketForm(request.POST, instance=ticket)  # préremplissage formulaire
+        form = TicketForm(request.POST, request.FILES, instance=ticket)  # préremplissage formulaire
         if form.is_valid():
             form.save()
             return redirect('my-posts')
@@ -319,4 +319,28 @@ def review_update(request, review_id):
     return render(request, 'reviews_app/review_update.html',  {'form': form, 'ticket': ticket})
 
 
+
+
+@login_required
+def ticket_delete(request, ticket_id):
+    ticket = models.Ticket.objects.get(id=ticket_id)  
+
+    if request.method == 'POST':
+        ticket.delete()
+        return redirect('my-posts')
+    #no need for else
+    return render(request, 'reviews_app/ticket_delete.html', {'ticket': ticket})
+
+
+
+
+@login_required
+def review_delete(request, review_id):
+    review = models.Review.objects.get(id=review_id)  
+
+    if request.method == 'POST':
+        review.delete()
+        return redirect('my-posts')
+    #no need for else
+    return render(request, 'reviews_app/review_delete.html',  {'review': review})
 

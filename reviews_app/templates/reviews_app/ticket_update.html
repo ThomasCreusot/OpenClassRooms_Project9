@@ -2,7 +2,7 @@
 {% block content %}
     <h1>Modifier votre ticket</h1>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+
         
         <p>Titre</p>
         {{ form.title }}
@@ -16,6 +16,8 @@
         {% endif %}
  
         {{ form.image }}
+
+        {% csrf_token %}
         <br>
 
         <input type="submit" value="Envoyer">
@@ -23,7 +25,7 @@
 
 
 
-    <button><a href="{% url 'home' %}">Retour</a></button>    
+    <button><a href="{% url 'my-posts' %}">Retour</a></button>    
 {% endblock %}
 
 
