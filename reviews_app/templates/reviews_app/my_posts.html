@@ -5,49 +5,45 @@
 
 {% block content %}
 
-    <p>Vous êtes connecté en tant que {{ user.username }}</p>
+    <p>Vos posts</p>
 
- 
-    <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
-    <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
-
-
-    <br>
-    <br>
-
-    {% for instance in tickets_and_reviews %}
+    {% for instance in my_tickets_and_reviews %}
         {% if instance|model_type == 'Ticket' %}
             <div class="ticket">
-                <p>{{ instance.user }} a demandé une critique</p>
+                <p>Vous avez publié un ticket</p>
                 <p>{{ instance.time_created }}</p> 
-                <p>{{ instance.title }} </p>
-                <p>{{ instance.description }}</p>
+                <p>{{ instance.title }}</p>
+
                 {% if instance.image %}
                     <img src="{{ instance.image.url }}">
                 {% endif %}
 
-                {% if instance in tickets_without_review %}
-                    <button><a href="{% url 'review-create-for-a-ticket' instance.id %}">Créer une critique</a></button>    
-                {% endif %}
+
+                <button><a href="{% url 'ticket-update' instance.id %}">Modifier</a></button>    
+                <button><a href="{% url 'home' %}">Supprimer</a></button>    
             </div>
 
 
 
         {% elif instance|model_type == 'Review' %}
             <div class="review">
-                <p>{{ instance.user }} a posté une critique</p>
+                <p>Vous avez publié une critique</p>
                 <p>{{ instance.time_created }}</p>
                 <p>{{ instance.headline }}</p>
                 <p>{{ instance.rating }}</p>
                 <p>{{ instance.body }}</p>
 
                 <div class="ticket-in-review">
-                    <p>Ticket - {{ instance.ticket.user }}</p>
+                    <p>Ticket - Vous</p>
+                    <p>{{ instance.ticket.time_created }}</p>
                     <p>{{ instance.ticket.title }}</p>
                     {% if instance.ticket.image %}
                         <img src="{{ instance.ticket.image.url }}">
                     {% endif %}
                 </div>
+
+                <button><a href="{% url 'review-update' instance.id %}">Modifier</a></button>    
+                <button><a href="{% url 'home' %}">Supprimer</a></button>    
             </div>
         {% endif %}
     <br>

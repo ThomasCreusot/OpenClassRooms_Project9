@@ -35,6 +35,9 @@ urlpatterns = [
     path('signup/', authentication_app.views.signup_page, name='signup'),
 
     path('home/', reviews_app.views.home, name='home'),
+    path('my_posts/', reviews_app.views.my_posts, name='my-posts'),
+
+
     path('tickets/add/', reviews_app.views.ticket_create, name='ticket-create'),
 
     path('reviews_and_tickets/add', reviews_app.views.review_and_ticket_upload, name='review_and_ticket-create'),

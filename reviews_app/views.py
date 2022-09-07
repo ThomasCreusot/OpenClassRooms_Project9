@@ -273,14 +273,33 @@ def follow_users(request):
 
 
 
+@login_required
+def my_posts(request):
+    my_reviews = models.Review.objects.filter(user=request.user)
+    my_tickets = models.Ticket.objects.filter(user=request.user)
 
+    my_tickets_and_reviews = sorted(
+        chain(my_tickets, my_reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
+
+    return render(request, 'reviews_app/my_posts.html', {'my_tickets_and_reviews': my_tickets_and_reviews})
 
 
 
 @login_required
 def ticket_update(request, ticket_id):
     ticket = models.Ticket.objects.get(id=ticket_id)  
-    form = TicketForm(instance=ticket)  # préremplissage formulaire
+
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)  # préremplissage formulaire
+        if form.is_valid():
+            form.save()
+            return redirect('my-posts')
+    else:
+        form = TicketForm(instance=ticket)
+
     return render(request, 'reviews_app/ticket_update.html', {'form': form, 'ticket': ticket})
 
 
@@ -288,5 +307,16 @@ def ticket_update(request, ticket_id):
 def review_update(request, review_id):
     review = models.Review.objects.get(id=review_id)  
     ticket = review.ticket
-    form = ReviewForm(instance=review)  # préremplissage formulaire
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)  # préremplissage formulaire
+        if form.is_valid():
+            form.save()
+            return redirect('my-posts')
+    else:
+        form = ReviewForm(instance=review)  # préremplissage formulaire
+
     return render(request, 'reviews_app/review_update.html',  {'form': form, 'ticket': ticket})
+
+
+

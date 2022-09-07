@@ -17,7 +17,7 @@
         <div>
         {%  if user.is_authenticated %}
             <a href="{% url 'home' %}">Flux</a>
-            <p>Posts</p>
+            <a href="{% url 'my-posts' %}">Posts</a>
             <a href="{% url 'follow_users' %}">Abonnements</a>
             <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
         {% endif %}
