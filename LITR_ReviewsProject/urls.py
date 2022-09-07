@@ -41,7 +41,15 @@ urlpatterns = [
 
     path('reviews/add_for_a_given_ticket/<int:ticket_id>', reviews_app.views.review_for_a_given_ticket_create, name='review-create-for-a-ticket'),
 
+
+
     path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
+
+    path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
+
+    path('tickets/update/<int:ticket_id>/', reviews_app.views.ticket_update, name='ticket-update'),
+    path('reviews/update/<int:review_id>/', reviews_app.views.review_update, name='review-update'),
+
 ]
 
 

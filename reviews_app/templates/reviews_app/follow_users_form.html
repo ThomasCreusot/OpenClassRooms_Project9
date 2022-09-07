@@ -3,23 +3,34 @@
 
 <h2>Suivre des utilisateurs</h2>
     <form method="post">
+        {{input_form}}
+
         {{ form.as_p }}
+        {{message}}
         {% csrf_token %}
         <button type="submit" >Envoyer</button>
-
-        <p>Abonnements : devrait en avoir plusieurs, ma table many to many ne marche donc pas.</p>
-        {{subscriptions}}
-        <br>
-        <p>Abonnés ERREUR dans le view, ne marche pas </p>
-        {{subscribers}}
-
-
-        <p>all_users</p>
-        {{all_users}}
-
-        <button><a href="{% url 'home' %}">Retour</a></button>    
     </form>
 
+    <p>Abonnements</p>
+    <table>
+    {% for subscription in subscriptions %}
+        <tr>
+            <td>{{ subscription }}</td>
+            <td> <button><a href="{% url 'home' %}">Désabonner</a></button> </td>
+            
+        </tr>
+    {% endfor %}
+    </table>
+    <br>
+    <p>Abonnés</p>
+    <table>
+    {% for subscriber in subscribers %}
+        <tr>
+            <td>{{ subscriber }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <br>
+    <button><a href="{% url 'home' %}">Retour</a></button>    
+
     {% endblock content %}
-
-

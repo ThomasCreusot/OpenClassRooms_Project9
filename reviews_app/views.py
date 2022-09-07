@@ -176,7 +176,7 @@ def review_for_a_given_ticket_create(request, ticket_id):
         form = ReviewForm()
     return render(request,
             'reviews_app/review_create_for_a_ticket.html',
-            {'form': form})
+            {'form': form, 'ticket': ticket})
 
 
 
@@ -188,15 +188,13 @@ def review_for_a_given_ticket_create(request, ticket_id):
 
 
 from authentication_app.models import User
+from reviews_app.forms import FollowUsersForm_input
 
-"""original code : FUNCTIONAL"""
-@login_required
-def follow_users(request):
+"""original code : FUNCTIONAL
     form = FollowUsersForm(instance=request.user)
     if request.method == 'POST':
         form = FollowUsersForm(request.POST, instance=request.user)
         if form.is_valid():
-
             #les utilisateurs auxquels on est déja abonnés sont dans request.user.follows.all()
             #print("1.request.user.follows.all()", request.user.follows.all())
 
@@ -211,72 +209,84 @@ def follow_users(request):
 
 
     subscriptions = request.user.follows.all()
-
-    # all Users : 
-    # subscribers = User.objects.all()
-
-
-    #subscribers = User.objects.filter(
-    #    Q(followed_by__in=str(request.user.id))  # other solution with xxx_set.all() ? https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
-    #    )
-    subscribers = User.objects.filter(follows=request.user)
-
-    #subscribers = User.objects.filter(
-    #    Q(follows__in=str(request.user.id))  # other solution with xxx_set.all() ? https://docs.djangoproject.com/en/4.1/topics/db/examples/many_to_many/
-    #    )
-    #print("aze", str(request.user.id))
-    #print(subscribers)
-
-    all_users = User.objects.all()
-
-    #les subscribers sont des utilisateurs dont les followers correspondant à l'utilisateur connecté c'est à dire request.user
-    # follow_users :  'User' object is not iterable
-    # followed_by :  Cannot query "utilisateur2": Must be "UserFollows" instance.
-    # following :   Cannot query "utilisateur2": Must be "UserFollows" instance.
-    # follows : 'User' object is not iterable
-    # d'ou viennent followed by et following ? ce sont les termes de mon modele UserFollows (la table de la relation many to many): 
-        #user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        #                    related_name='following')
-        #followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-        #                    related_name='followed_by')
-    # je veux que le followed_by (terme correspondant à followed_user) d'un autre utilisateur que celui est est connecté CORRESPONDE à l'utilisateur connecté   : ce sont les abonnés
-
-    #ok fonc on me dit que je dois avoir une 'UserFollows' instance et donc c'est maintenant mon request.user qui ne va pas, il me foaut son nom ou son id, je sais pas, mais quelque chose.add()
-    #c'est l'ID qu'il me faut, si je mets         Q(followed_by__in="a") ; j'ai la phrase d'erreur : Field 'id' expected a number but got 'a'.
-
-    #la ou je bugue : si je mets         Q(followed_by__in=request.user.id); j'ai le message 'int is not iterable'
-    #????????????????????????????
-    #l'ID n'est pas de type int ? peut etre un type PrimaryKey ? 
-
-    #je tente de trier avec         Q(followed_by__username="utilisateur3")  Related Field got invalid lookup: username
-
-    # SOLUTION? :         Q(followed_by__in=str(request.user.id))
-    # NON : marche pour l'utilisateur 2 mais pas les autres, je comprends pas.
-    # wow.. je créée de nouveaux utilisateur u4,u5 et u6 : avant que je ne fasse quoi que ce soit, 'utilisateur1' est abonné à u5 ? wtf.
-    # ma théorie: rien de sur mais je pense qu'il ne tient compte que tu premier chiffre de l'ID.
-
-    return render(request, 'reviews_app/follow_users_form.html', context={'form': form, 'subscriptions': subscriptions, 'subscribers': subscribers, 'all_users': all_users})
-
-
-
-
 """
+
+from django.core.exceptions import ValidationError
+
+
 @login_required
 def follow_users(request):
+    #Added only because the client wishes to have an inputField and not a manyToMany field
+    input_form = FollowUsersForm_input()
+
+    #initial form for the manyToMany relationship
     form = FollowUsersForm(instance=request.user)
+
     if request.method == 'POST':
         form = FollowUsersForm(request.POST, instance=request.user)
+        input_form = FollowUsersForm_input(request.POST)
+
         if form.is_valid():
 
-            follow_form = form.save(commit=False)
-            # set the connected user to the user before saving the model
-            follow_form.user = request.user
-            # set the ticket before saving the model
-            # Save
-            follow_form.save()
+            username_to_follow = request.POST['user_to_follow']
 
-            return redirect('home')
-    return render(request, 'reviews_app/follow_users_form.html', context={'form': form})
+            # Following itself
+            if username_to_follow == str(request.user.username):
+                raise ValidationError("Vous ne pouvez pas vous abonner à vous même")
 
-"""
-    
+            # Already followed
+            elif username_to_follow in [user.username for user in request.user.follows.all()]:
+                raise ValidationError("Vous êtes déja abonné à {0}".format(username_to_follow))
+
+            # Following
+            elif username_to_follow in [user.username for user in User.objects.all()]:
+                print("Abonnement de {0}  à {1} réussi".format(request.user.username, username_to_follow))
+                
+                #retrouver l'utilisateur que l'utilisateur connecté va suivre
+                users_we_want_to_follow = User.objects.filter(username = username_to_follow)
+                #ajout de l'utilisateur à suivre dans le champ follows de l'utilisateur connecté
+                request.user.follows.add(*users_we_want_to_follow, through_defaults=None)
+
+                return redirect('home')
+
+            # User does not exists
+            else:
+                raise ValidationError("L'utilisateur {0} n'est pas inscrit sur ce site".format(username_to_follow))
+
+
+            # Before the FollowUsersForm_input()
+            # les utilisateurs auxquels on est déja abonnés sont dans request.user.follows.all()
+            # print("1.request.user.follows.all()", request.user.follows.all())
+            # CODE OK users_we_want_to_follow = form.cleaned_data['follows']
+
+            # ancienne version : user_follow_form = form.save() mais cela effacait les abonnés qu'on avait déja
+            # les nouveaux abonnements sont dans user_follow_form.follows.all(), sous forme de QuerySet
+            # print("2.user_follow_form", user_follow_form.follows.all())
+            # code OK request.user.follows.add(*users_we_want_to_follow, through_defaults=None)
+            # code OK return redirect('home')
+
+
+    subscriptions = request.user.follows.all()
+    subscribers = User.objects.filter(follows=request.user)
+
+    return render(request, 'reviews_app/follow_users_form.html', context={'input_form':input_form, 'form': form,'subscriptions': subscriptions, 'subscribers': subscribers})
+
+
+
+
+
+
+
+@login_required
+def ticket_update(request, ticket_id):
+    ticket = models.Ticket.objects.get(id=ticket_id)  
+    form = TicketForm(instance=ticket)  # préremplissage formulaire
+    return render(request, 'reviews_app/ticket_update.html', {'form': form, 'ticket': ticket})
+
+
+@login_required
+def review_update(request, review_id):
+    review = models.Review.objects.get(id=review_id)  
+    ticket = review.ticket
+    form = ReviewForm(instance=review)  # préremplissage formulaire
+    return render(request, 'reviews_app/review_update.html',  {'form': form, 'ticket': ticket})

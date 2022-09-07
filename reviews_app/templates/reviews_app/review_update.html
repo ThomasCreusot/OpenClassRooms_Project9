@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Créer une nouvelle review</h1>
-    <p>Vous êtes en train de poster en réponse à</p>
+    <h1>Modifier votre critique</h1>
 
+    <p>Vous êtes en train de poster en réponse à</p>
     <div class="ticket">
         <p>{{ ticket.user }} a demandé une critique</p>
         <p>{{ ticket.title }}</p>
@@ -11,12 +11,11 @@
             <img src="{{ ticket.image.url }}">
         {% endif %}
     </div>
-    
 
-
-    <form action="" method="post" novalidate>
-        {% csrf_token %}
+    <p>Critique</p>    
+    <form method="post">
         {{ form.as_p }}
+        {% csrf_token %}
         <input type="submit" value="Envoyer">
     </form>
     <button><a href="{% url 'home' %}">Retour</a></button>    

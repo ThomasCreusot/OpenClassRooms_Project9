@@ -7,46 +7,14 @@
 
     <p>Vous êtes connecté en tant que {{ user.username }}</p>
 
-    <p>Code {{ user.follows }} --> dans la vue; renvoyer via le contexte ; et ajouter .all()</p>
-    <p>Vous suivez : {{ user.follows }}</p>
-
+ 
     <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
     <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
 
-    <button><a href="{% url 'follow_users' %}">follow_users</a></button>
-
-    <p>ICI : le flux</p>
 
     <br>
     <br>
-    <div id="homepage__signup">
-    <p>css fonctionnel avec ID</p>
-    </div>
 
-    <div class="ticket">
-        <p>css non fonctionnel avec classes : question d'attrs? </p>
-    </div>
-    <br>
-    <br>
-
-
-    <p>ancien code avec uniquement tickets</p>
-    <p>div class ticket à supprimer</p>
-    {% for ticket in tickets %}
-        <div class="ticket">
-            <p>{{ ticket.user }} a demandé une critique</p>
-            <p>{{ ticket.title }}</p>
-            <p>{{ ticket.description }}</p>
-            {% if ticket.image %}
-                <img src="{{ ticket.image.url }}">
-            {% endif %}
-        </div>
-    {% endfor %}
-
-
-    <br>
-
-    <p>nouveau code avec  tickets et review</p>
     {% for instance in tickets_and_reviews %}
         {% if instance|model_type == 'Ticket' %}
             <div class="ticket">

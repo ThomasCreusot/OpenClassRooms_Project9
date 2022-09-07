@@ -16,9 +16,9 @@
         <p>LiTReview</p>
         <div>
         {%  if user.is_authenticated %}
-            <p>Flux</p>
+            <a href="{% url 'home' %}">Flux</a>
             <p>Posts</p>
-            <p>Abonnements</p>
+            <a href="{% url 'follow_users' %}">Abonnements</a>
             <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
         {% endif %}
         </div>
