@@ -9,6 +9,7 @@ from reviews_app.forms import TicketForm, ReviewForm, FollowUsersForm
 from . import models
 
 from authentication_app.models import User
+from reviews_app.models import UserFollows
 
 from django.db.models import Q
 
@@ -352,8 +353,10 @@ def review_delete(request, review_id):
 @login_required
 def follow_user_delete(request, followed_user_id):
     followed_user = User.objects.get(id=followed_user_id)  
+    ConnectedUser_FollowedUser_relation = UserFollows.objects.get(user = request.user , followed_user = followed_user)  
+
     if request.method == 'POST':
-        followed_user.delete()
+        ConnectedUser_FollowedUser_relation.delete()
         return redirect('follow_users')
 
     return render(request, 'reviews_app/follow_user_delete.html',  {'followed_user': followed_user})
