@@ -15,9 +15,9 @@
     <table>
     {% for subscription in subscriptions %}
         <tr>
-            <td>{{ subscription }}</td>
-            <td> <button><a href="{% url 'home' %}">Désabonner</a></button> </td>
-            
+            <td>{{ subscription.username }}</td>
+            <td><button><a href="{% url 'follow_user_delete' subscription.id  %}">Désabonner</a></button> </td>
+
         </tr>
     {% endfor %}
     </table>

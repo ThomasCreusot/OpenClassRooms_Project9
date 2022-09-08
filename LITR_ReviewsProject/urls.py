@@ -49,6 +49,7 @@ urlpatterns = [
 
 
     path('follow-users/', reviews_app.views.follow_users, name='follow_users'),
+    path('follow-users/delete/<int:followed_user_id>/', reviews_app.views.follow_user_delete, name='follow_user_delete'),
 
 ]
 

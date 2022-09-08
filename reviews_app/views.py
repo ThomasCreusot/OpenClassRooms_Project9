@@ -8,6 +8,8 @@ from reviews_app.forms import TicketForm, ReviewForm, FollowUsersForm
 # Feed creation (flux)
 from . import models
 
+from authentication_app.models import User
+
 from django.db.models import Q
 
 # Create your views here.
@@ -247,7 +249,7 @@ def follow_users(request):
                 #ajout de l'utilisateur à suivre dans le champ follows de l'utilisateur connecté
                 request.user.follows.add(*users_we_want_to_follow, through_defaults=None)
 
-                return redirect('home')
+                #return redirect('home')
 
             # User does not exists
             else:
@@ -343,4 +345,16 @@ def review_delete(request, review_id):
         return redirect('my-posts')
     #no need for else
     return render(request, 'reviews_app/review_delete.html',  {'review': review})
+
+
+
+
+@login_required
+def follow_user_delete(request, followed_user_id):
+    followed_user = User.objects.get(id=followed_user_id)  
+    if request.method == 'POST':
+        followed_user.delete()
+        return redirect('follow_users')
+
+    return render(request, 'reviews_app/follow_user_delete.html',  {'followed_user': followed_user})
 
