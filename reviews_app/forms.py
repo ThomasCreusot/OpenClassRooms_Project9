@@ -1,6 +1,6 @@
 
 from dataclasses import field, fields
-from http.client import OK
+
 from turtle import textinput
 from django import forms
 from reviews_app.models import Ticket, Review
@@ -15,15 +15,20 @@ class TicketForm(forms.ModelForm):
      # exclusion of user field, as it is the connected user by default (see views.py) 
      # fields = '__all__'
      exclude = ('user',)
+     
+     
 
 
 class ReviewForm(forms.ModelForm):
+
    class Meta:
      model = Review
      # exclusion of user field, as it is the connected user by default (see views.py) 
      #fields = '__all__'
      fields = ['headline', 'rating', 'body']
      exclude = ('user', 'ticket',)
+
+     
 
 """
 class DisplayTicketForm(forms.ModelForm):

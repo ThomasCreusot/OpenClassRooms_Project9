@@ -12,17 +12,19 @@
     <body>
 
         <header>
-            <div></div> <!--div for spacing with flexbox-->
-            <p>LiTReview</p>
+            <div class="head_space"></div> <!--div for spacing with flexbox-->
+            <p id="head_title" class="head_space">LiTReview</p>
 
             {%  if user.is_authenticated %}
-                <nav>
+                <nav class="head_space">
                     <a href="{% url 'home' %}">Flux</a>
                     <a href="{% url 'my-posts' %}">Posts</a>
                     <a href="{% url 'follow_users' %}">Abonnements</a>
-                    <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+                    <a href="{% url 'logout' %}">Se déconnecter</a>
                 </nav>
-                {% endif %}
+            {% else %}
+                <div class="head_space"></div> <!--div for spacing with flexbox-->
+            {% endif %}
 
         </header>
 

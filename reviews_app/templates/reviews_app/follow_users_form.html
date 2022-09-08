@@ -4,36 +4,35 @@
     <div id = "follow_user_form">
 
         <h2>Suivre d'autres utilisateurs</h2>
-            <form method="post">
-                {{input_form}}
+        <form method="post">
+            {{input_form.user_to_follow}}
 
-                {{ form.as_p }}
-                {{message}}
-                {% csrf_token %}
-                <button type="submit" >Envoyer</button>
-            </form>
+            {{ form.as_p }}
+            {{message}}
+            {% csrf_token %}
+            <button type="submit" >Envoyer</button>
+        </form>
 
+        <h2>Abonnements</h2>
+        <table>
+        {% for subscription in subscriptions %}
+            <tr>
+                <td>{{ subscription.username }}</td>
+                <td class="table-link-td"><a href="{% url 'follow_user_delete' subscription.id  %}">Désabonner</a> </td>
 
-            <p>Abonnements</p>
-            <table>
-            {% for subscription in subscriptions %}
-                <tr>
-                    <td>{{ subscription.username }}</td>
-                    <td><a href="{% url 'follow_user_delete' subscription.id  %}">Désabonner</a> </td>
+            </tr>
+        {% endfor %}
+        </table>
 
-                </tr>
-            {% endfor %}
-            </table>
-
-
-            <p>Abonnés</p>
-            <table>
-            {% for subscriber in subscribers %}
-                <tr>
-                    <td>{{ subscriber }}</td>
-                </tr>
-            {% endfor %}
-            </table>
+        
+        <h2>Abonnés</h2>
+        <table>
+        {% for subscriber in subscribers %}
+            <tr>
+                <td>{{ subscriber }}</td>
+            </tr>
+        {% endfor %}
+        </table>
   
 
     </div>

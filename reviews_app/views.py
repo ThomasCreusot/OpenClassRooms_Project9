@@ -223,7 +223,7 @@ from django.core.exceptions import ValidationError
 @login_required
 def follow_users(request):
     #Added only because the client wishes to have an inputField and not a manyToMany field
-    input_form = FollowUsersForm_input()
+    input_form = FollowUsersForm_input(initial={'user_to_follow': "Nom d'utilisateur"})
 
     #initial form for the manyToMany relationship
     form = FollowUsersForm(instance=request.user)

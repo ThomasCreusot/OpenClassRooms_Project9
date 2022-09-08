@@ -9,7 +9,7 @@
 
         <p>Vous êtes connecté en tant que {{ user.username }}</p>
 
-        <div>
+        <div id="ticket_and_review_creation">
             <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
             <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique</a></button>    
         </div>
@@ -17,26 +17,29 @@
         {% for instance in tickets_and_reviews %}
             {% if instance|model_type == 'Ticket' %}
                 <div class="ticket">
-                    <p>{{ instance.user }} a demandé une critique</p>
+                    <p class="ticket--user_asks_review">{{ instance.user }} a demandé une critique</p>
                     <p class="time_created">{{ instance.time_created }}</p> 
-                    <p>{{ instance.title }} </p>
+                    <p class="ticket--title"> {{ instance.title }} </p>
                     <p>{{ instance.description }}</p>
+
                     {% if instance.image %}
                         <img src="{{ instance.image.url }}">
                     {% endif %}
 
                     {% if instance in tickets_without_review %}
-                        <button><a href="{% url 'review-create-for-a-ticket' instance.id %}">Créer une critique</a></button>    
+                        <br>
+                        <button class = "button--answer_a_ticket"><a href="{% url 'review-create-for-a-ticket' instance.id %}">Créer une critique</a></button>    
                     {% endif %}
+
                 </div>
 
 
 
             {% elif instance|model_type == 'Review' %}
                 <div class="review">
-                    <p>{{ instance.user }} a posté une critique</p>
+                    <p class="user_answers_review">{{ instance.user }} a posté une critique</p>
                     <p class="time_created">{{ instance.time_created }}</p>
-                    <p>{{ instance.headline }} {{ instance.rating }} </p>
+                    <p class="review--headline" >{{ instance.headline }} {{ instance.rating }} </p>
                     <p>{{ instance.body }}</p>
 
                     <div class="ticket-in-review">

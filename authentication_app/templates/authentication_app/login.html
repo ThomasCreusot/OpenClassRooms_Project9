@@ -10,22 +10,24 @@
         <button><a href="{% url 'home' %}">Accueil</a></button>
 
     {% else %}
-        <div></div> <!--div for spacing with flexbox-->
-        <div id="homepage__signup">
-            <p>Inscrivez-vous maintenant</p>
-            <button><a href="{% url 'signup' %}">S'inscrire</a></button>
-        </div>
 
-        <div id="homepage__login">
-            <p>Connectez-vous</p>
-            <p>{{ message }}</p>
-            <form method="post">
-                {{ form.as_p }}
-                {% csrf_token %}
-                <button type="submit" >Se connecter</button>
-            </form>
-        </div>
-        <div></div> <!--div for spacing with flexbox-->
+            <div></div> <!--div for spacing with flexbox-->
+            <div id="homepage__signup">
+                <p>Inscrivez-vous maintenant</p>
+                <button><a href="{% url 'signup' %}">S'inscrire</a></button>
+            </div>
+
+            <div id="homepage__login">
+                <p>Connectez-vous</p>
+                <form method="post">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" >Se connecter</button>
+                    <p>{{ message }}</p>
+                </form>
+            </div>
+            <div></div> <!--div for spacing with flexbox-->
+
     {% endif %}
 </div> <!--homepagediv-->
 {% endblock content %}
