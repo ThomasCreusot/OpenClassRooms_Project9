@@ -34,6 +34,9 @@ def home(request):
         Q(ticket__user=request.user)
     )
 
+    for review in reviews:
+        review.rating = "".join((review.rating * "★", (5 - review.rating)*"☆"))
+
     #LIMITER LES TICKETS AFFICHES A CEUX DES UTILISATEURS SUIVIS
     #code originel
     #tickets = models.Ticket.objects.all()

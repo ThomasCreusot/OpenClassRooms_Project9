@@ -5,53 +5,52 @@
 
 {% block content %}
 
-    <p>Vous êtes connecté en tant que {{ user.username }}</p>
+    <div id = homeblocpage>
 
- 
-    <button><a href="{% url 'ticket-create' %}">Demander une critique (creer un ticket)</a></button>
-    <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique (qui n'a pas encore de ticket)</a></button>    
+        <p>Vous êtes connecté en tant que {{ user.username }}</p>
 
+        <div>
+            <button><a href="{% url 'ticket-create' %}">Demander une critique</a></button>
+            <button><a href="{% url 'review_and_ticket-create' %}">Créer une critique</a></button>    
+        </div>
 
-    <br>
-    <br>
+        {% for instance in tickets_and_reviews %}
+            {% if instance|model_type == 'Ticket' %}
+                <div class="ticket">
+                    <p>{{ instance.user }} a demandé une critique</p>
+                    <p class="time_created">{{ instance.time_created }}</p> 
+                    <p>{{ instance.title }} </p>
+                    <p>{{ instance.description }}</p>
+                    {% if instance.image %}
+                        <img src="{{ instance.image.url }}">
+                    {% endif %}
 
-    {% for instance in tickets_and_reviews %}
-        {% if instance|model_type == 'Ticket' %}
-            <div class="ticket">
-                <p>{{ instance.user }} a demandé une critique</p>
-                <p>{{ instance.time_created }}</p> 
-                <p>{{ instance.title }} </p>
-                <p>{{ instance.description }}</p>
-                {% if instance.image %}
-                    <img src="{{ instance.image.url }}">
-                {% endif %}
-
-                {% if instance in tickets_without_review %}
-                    <button><a href="{% url 'review-create-for-a-ticket' instance.id %}">Créer une critique</a></button>    
-                {% endif %}
-            </div>
-
-
-
-        {% elif instance|model_type == 'Review' %}
-            <div class="review">
-                <p>{{ instance.user }} a posté une critique</p>
-                <p>{{ instance.time_created }}</p>
-                <p>{{ instance.headline }}</p>
-                <p>{{ instance.rating }}</p>
-                <p>{{ instance.body }}</p>
-
-                <div class="ticket-in-review">
-                    <p>Ticket - {{ instance.ticket.user }}</p>
-                    <p>{{ instance.ticket.title }}</p>
-                    {% if instance.ticket.image %}
-                        <img src="{{ instance.ticket.image.url }}">
+                    {% if instance in tickets_without_review %}
+                        <button><a href="{% url 'review-create-for-a-ticket' instance.id %}">Créer une critique</a></button>    
                     {% endif %}
                 </div>
-            </div>
-        {% endif %}
-    <br>
-    {% endfor %}
 
+
+
+            {% elif instance|model_type == 'Review' %}
+                <div class="review">
+                    <p>{{ instance.user }} a posté une critique</p>
+                    <p class="time_created">{{ instance.time_created }}</p>
+                    <p>{{ instance.headline }} {{ instance.rating }} </p>
+                    <p>{{ instance.body }}</p>
+
+                    <div class="ticket-in-review">
+                        <p>Ticket - {{ instance.ticket.user }}</p>
+                        <p>{{ instance.ticket.title }}</p>
+                        {% if instance.ticket.image %}
+                            <img src="{{ instance.ticket.image.url }}">
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        <br>
+        {% endfor %}
+
+    </div>
 
 {% endblock content %}

@@ -7,6 +7,7 @@
         <button><a href="{% url 'home' %}">Accueil</a></button>
 
     {% else %}
+        <div id = signup_form>
         <p>Inscrivez-vous</p>
         {% if form.errors %}
             {{ form.errors }}
@@ -17,5 +18,6 @@
             <button><a href="{% url 'login' %}">Retour</a></button>
             <button type="submit" >S’inscrire</button>
         </form>
+        </div>
     {% endif %}
 {% endblock content %}

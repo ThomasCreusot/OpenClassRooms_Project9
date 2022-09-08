@@ -5,25 +5,28 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>The Reviews Project</title>
+        <title>The Literature Reviews Project</title>
         <link rel="stylesheet" href="{% static './styles.css' %}" />
     </head>
 
     <body>
 
         <header>
-        <div></div> <!--div for spacing with flexbox-->
-        <p>LiTReview</p>
-        <div>
-        {%  if user.is_authenticated %}
-            <a href="{% url 'home' %}">Flux</a>
-            <a href="{% url 'my-posts' %}">Posts</a>
-            <a href="{% url 'follow_users' %}">Abonnements</a>
-            <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
-        {% endif %}
-        </div>
+            <div></div> <!--div for spacing with flexbox-->
+            <p>LiTReview</p>
+
+            {%  if user.is_authenticated %}
+                <nav>
+                    <a href="{% url 'home' %}">Flux</a>
+                    <a href="{% url 'my-posts' %}">Posts</a>
+                    <a href="{% url 'follow_users' %}">Abonnements</a>
+                    <p><a href="{% url 'logout' %}">Se déconnecter</a></p>
+                </nav>
+                {% endif %}
+
         </header>
 
         {% block content %}{% endblock content %}
+
     </body>
 </html>

@@ -1,36 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Suivre des utilisateurs</h2>
-    <form method="post">
-        {{input_form}}
+    <div id = "follow_user_form">
 
-        {{ form.as_p }}
-        {{message}}
-        {% csrf_token %}
-        <button type="submit" >Envoyer</button>
-    </form>
+        <h2>Suivre d'autres utilisateurs</h2>
+            <form method="post">
+                {{input_form}}
 
-    <p>Abonnements</p>
-    <table>
-    {% for subscription in subscriptions %}
-        <tr>
-            <td>{{ subscription.username }}</td>
-            <td><button><a href="{% url 'follow_user_delete' subscription.id  %}">Désabonner</a></button> </td>
+                {{ form.as_p }}
+                {{message}}
+                {% csrf_token %}
+                <button type="submit" >Envoyer</button>
+            </form>
 
-        </tr>
-    {% endfor %}
-    </table>
-    <br>
-    <p>Abonnés</p>
-    <table>
-    {% for subscriber in subscribers %}
-        <tr>
-            <td>{{ subscriber }}</td>
-        </tr>
-    {% endfor %}
-    </table>
-    <br>
-    <button><a href="{% url 'home' %}">Retour</a></button>    
 
-    {% endblock content %}
+            <p>Abonnements</p>
+            <table>
+            {% for subscription in subscriptions %}
+                <tr>
+                    <td>{{ subscription.username }}</td>
+                    <td><a href="{% url 'follow_user_delete' subscription.id  %}">Désabonner</a> </td>
+
+                </tr>
+            {% endfor %}
+            </table>
+
+
+            <p>Abonnés</p>
+            <table>
+            {% for subscriber in subscribers %}
+                <tr>
+                    <td>{{ subscriber }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+  
+
+    </div>
+{% endblock content %}
