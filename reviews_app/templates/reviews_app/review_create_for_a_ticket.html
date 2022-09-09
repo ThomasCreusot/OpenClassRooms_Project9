@@ -2,7 +2,9 @@
 {% block content %}
     <h1>Créer une nouvelle review</h1>
     <p>Vous êtes en train de poster en réponse à</p>
-    <div class="ticket">
+
+    <div class="ticket_and_review-ticket_part">
+
         <p>{{ ticket.user }} a demandé une critique</p>
         <p>{{ ticket.title }}</p>
         <p>{{ ticket.description }}</p>
@@ -10,15 +12,33 @@
             <img src="{{ ticket.image.url }}">
         {% endif %}
     </div>
+
     
 
 
     <form action="" method="post" novalidate>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Envoyer">
+        <div class="ticket_and_review-review_part"> 
+            <p>Titre</p>
+            {{ form.headline }}
+            <p>Note</p>
+
+
+            {{ form.rating }}  
+            <div class = "review_rating_choice">
+                {{ form.rating_choice_field }}  
+            </div>
+
+            <p>Commentaire</p>
+            {{ form.body }}
+
+
+            {% csrf_token %}
+
+            <button type="submit" >Envoyer</button>
+
+        </div>
     </form>
-    <button><a href="{% url 'home' %}">Retour</a></button>    
+
 {% endblock %}
 
 

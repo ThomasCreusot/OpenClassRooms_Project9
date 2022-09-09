@@ -176,6 +176,11 @@ a{
     margin-left: 2%;
 }
 
+.ticket_and_review-ticket_part img
+{
+    width: 50%;
+}
+
 .time_created
 {
     text-align: right;
@@ -331,4 +336,44 @@ table
     width: 20%;
     align-self: flex-end;
     margin: 3% 5% 3% 0% 
+    
+}
+
+.review_rating_choice 
+{
+    width: 80%;
+}
+.review_rating_choice div 
+{
+    width: 100%;
+    display: inline-block;
+}
+.review_rating_choice div div 
+{
+    width: 15%;
+}
+.review_rating_choice div div label
+{
+    width: 60%;
+}
+.review_rating_choice div div label input
+{
+    width: 40%;
+}
+
+
+
+
+.ticket-buttons, .review-buttons
+{
+
+    display: flex;
+    flex-direction : row;
+
+    /*Allignement
+    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
+    justify-content: space-around;
+
+    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
+    align-items: center;
 }

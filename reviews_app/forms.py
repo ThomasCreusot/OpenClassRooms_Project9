@@ -18,15 +18,24 @@ class TicketForm(forms.ModelForm):
      
      
 
-
 class ReviewForm(forms.ModelForm):
+    
+    rating_CHOICES = [('0', '-0'), 
+               ('1', '-1'),
+               ('2', '-2'),
+               ('3', '-3'),
+               ('4', '-4'),
+               ('5', '-5')]
+    rating_choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=rating_CHOICES)
 
-   class Meta:
-     model = Review
-     # exclusion of user field, as it is the connected user by default (see views.py) 
-     #fields = '__all__'
-     fields = ['headline', 'rating', 'body']
-     exclude = ('user', 'ticket',)
+    class Meta:
+        model = Review
+        # exclusion of user field, as it is the connected user by default (see views.py) 
+        #fields = '__all__'
+        fields = ['headline', 'rating', 'body', "rating_choice_field"]
+        #rating excluded for radio buttons presentation
+        exclude = ('user', 'ticket', 'rating')
+    
 
      
 

@@ -17,8 +17,12 @@
         {% for instance in tickets_and_reviews %}
             {% if instance|model_type == 'Ticket' %}
                 <div class="ticket">
-                    <p class="ticket--user_asks_review">{{ instance.user }} a demandé une critique</p>
-                    <p class="time_created">{{ instance.time_created }}</p> 
+                    <p class="ticket--user_asks_review">Critique demandée par {% get_poster_display instance.user %}</p>
+                    <!--old version : <p class="ticket--user_asks_review">{{ instance.user }} a demandé une critique</p>-->
+
+                    <p class="time_created">{{ instance.time_created|get_posted_at_display }}</p>
+                    <!--<p class="time_created">{{ instance.time_created }}</p>-->
+
                     <p class="ticket--title"> {{ instance.title }} </p>
                     <p>{{ instance.description }}</p>
 
@@ -37,13 +41,17 @@
 
             {% elif instance|model_type == 'Review' %}
                 <div class="review">
-                    <p class="user_answers_review">{{ instance.user }} a posté une critique</p>
-                    <p class="time_created">{{ instance.time_created }}</p>
+                    <p class="ticket--user_asks_review">Critique postée par {% get_poster_display instance.user %}</p>
+                    <!--old version : <p class="user_answers_review">{{ instance.user }} a posté une critique</p>-->
+
+                    <p class="time_created">{{ instance.time_created|get_posted_at_display }}</p>
+                    <!--<p class="time_created">{{ instance.time_created }}</p>-->
+
                     <p class="review--headline" >{{ instance.headline }} {{ instance.rating }} </p>
                     <p>{{ instance.body }}</p>
 
                     <div class="ticket-in-review">
-                        <p>Ticket - {{ instance.ticket.user }}</p>
+                        <p>Ticket - {% get_poster_display instance.user %}</p> 
                         <p>{{ instance.ticket.title }}</p>
                         {% if instance.ticket.image %}
                             <img src="{{ instance.ticket.image.url }}">

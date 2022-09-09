@@ -5,36 +5,45 @@
 
 {% block content %}
 
-    <p>Vos posts</p>
+<div id = homeblocpage>
+
+    <h2>Vos posts</h2>
 
     {% for instance in my_tickets_and_reviews %}
         {% if instance|model_type == 'Ticket' %}
             <div class="ticket">
-                <p>Vous avez publié un ticket</p>
-                <p>{{ instance.time_created }}</p> 
-                <p>{{ instance.title }}</p>
+                
+                <p class="ticket--user_asks_review">Critique demandée par {% get_poster_display instance.user %}</p>
+                <!--old version : <p class="ticket--user_asks_review">{{ instance.user }} a demandé une critique</p>-->
+
+                <p class="time_created">{{ instance.time_created|get_posted_at_display }}</p>
+                <!--<p class="time_created">{{ instance.time_created }}</p>-->
+
+                <p class="ticket--title"> {{ instance.title }} </p>
+                <p>{{ instance.description }}</p>
 
                 {% if instance.image %}
                     <img src="{{ instance.image.url }}">
                 {% endif %}
 
-
-                <button><a href="{% url 'ticket-update' instance.id %}">Modifier</a></button>    
-                <button><a href="{% url 'ticket-delete' instance.id %}">Supprimer</a></button>    
+                <div class="ticket-buttons">
+                    <button><a href="{% url 'ticket-update' instance.id %}">Modifier</a></button>    
+                    <button><a href="{% url 'ticket-delete' instance.id %}">Supprimer</a></button>    
+                </div>
             </div>
 
 
 
         {% elif instance|model_type == 'Review' %}
             <div class="review">
-                <p>Vous avez publié une critique</p>
-                <p>{{ instance.time_created }}</p>
-                <p>{{ instance.headline }}</p>
-                <p>{{ instance.rating }}</p>
+                <p class="ticket--user_asks_review">Critique postée par {% get_poster_display instance.user %}</p>
+                <p class="time_created">{{ instance.time_created|get_posted_at_display }}</p>
+
+                <p class="review--headline" >{{ instance.headline }} {{ instance.rating }} </p>
                 <p>{{ instance.body }}</p>
 
                 <div class="ticket-in-review">
-                    <p>Ticket - Vous</p>
+                    <p>Ticket - {% get_poster_display instance.user %}</p> 
                     <p>{{ instance.ticket.time_created }}</p>
                     <p>{{ instance.ticket.title }}</p>
                     {% if instance.ticket.image %}
@@ -42,10 +51,13 @@
                     {% endif %}
                 </div>
 
+                <div class="review-buttons">
                 <button><a href="{% url 'review-update' instance.id %}">Modifier</a></button>    
                 <button><a href="{% url 'review-delete' instance.id %}">Supprimer</a></button>    
+                </div>
             </div>
         {% endif %}
+
     <br>
     {% endfor %}
 

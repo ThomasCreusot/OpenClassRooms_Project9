@@ -106,8 +106,12 @@ def ticket_create(request):
             {'form': form})
 
 
+
+"""
 @login_required
 def review_create(request):
+
+
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -126,7 +130,8 @@ def review_create(request):
         form = ReviewForm()
     return render(request,
             'reviews_app/review_create.html',
-            {'form': form})
+            {'form': form, })
+"""
 
 
 
@@ -147,6 +152,10 @@ def review_and_ticket_upload(request):
             review = review_form.save(commit=False)
             review.user = request.user
             review.ticket = ticket
+
+            #print(review_form['rating_choice_field'].data)
+            review.rating = review_form['rating_choice_field'].data
+
             review.save()
             return redirect('home')
 
@@ -172,6 +181,9 @@ def review_for_a_given_ticket_create(request, ticket_id):
             review.user = request.user
             # set the ticket before saving the model
             review.ticket = ticket
+
+            review.rating = form['rating_choice_field'].data
+
             # Save
             review.save()
 
@@ -317,7 +329,15 @@ def review_update(request, review_id):
     if request.method == 'POST':
         form = ReviewForm(request.POST, instance=review)  # préremplissage formulaire
         if form.is_valid():
-            form.save()
+
+            # New instance but without saving in database, in order to attribute the user to the ForeignKey
+            review = form.save(commit=False)
+            review.rating = form['rating_choice_field'].data
+            # Save
+            review.save()
+
+            # old version
+            # form.save()
             return redirect('my-posts')
     else:
         form = ReviewForm(instance=review)  # préremplissage formulaire
