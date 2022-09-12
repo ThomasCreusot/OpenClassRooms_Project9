@@ -1,24 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Modifier votre critique</h1>
+<div id = "review_update_for_ticket">
+    <h2>Modifier votre critique</h2>
 
     <p>Vous êtes en train de poster en réponse à</p>
+
     <div class="ticket">
-        <p>{{ ticket.user }} a demandé une critique</p>
-        <p>{{ ticket.title }}</p>
-        <p>{{ ticket.description }}</p>
-        {% if ticket.image %}
-            <img src="{{ ticket.image.url }}">
-        {% endif %}
+        {% include 'reviews_app/partials/ticket_snippet.html' with ticket=ticket %}
     </div>
 
-    <p>Critique</p>    
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <input type="submit" value="Envoyer">
-    </form>
-    <button><a href="{% url 'my-posts' %}">Retour</a></button>    
+    <div class="review-update-form">
+        {% include 'reviews_app/partials/review_modification_snippet.html' with instance=instance %}
+    </div>
+
+</div>
+
 {% endblock %}
 
 

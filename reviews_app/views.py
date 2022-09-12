@@ -86,19 +86,20 @@ def review_create(request):
 @login_required
 def ticket_create(request):
     if request.method == 'POST':
-
         form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
-
             # New instance but without saving in database, in order to attribute the user to the ForeignKey
+
             ticket = form.save(commit=False)
             # set the connected user to the user before saving the model
             ticket.user = request.user
+
             # Save
             ticket.save()
 
             # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
             return redirect('home')  # , band.id)
+
     else:
         form = TicketForm()
     return render(request,
@@ -295,6 +296,9 @@ def follow_users(request):
 def my_posts(request):
     my_reviews = models.Review.objects.filter(user=request.user)
     my_tickets = models.Ticket.objects.filter(user=request.user)
+
+    for my_review in my_reviews:
+        my_review.rating = "".join((my_review.rating * "★", (5 - my_review.rating)*"☆"))
 
     my_tickets_and_reviews = sorted(
         chain(my_tickets, my_reviews),

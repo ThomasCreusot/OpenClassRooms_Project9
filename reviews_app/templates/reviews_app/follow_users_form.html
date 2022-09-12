@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
+    <h2>Suivre d'autres utilisateurs</h2>
+    
     <div id = "follow_user_form">
-
-        <h2>Suivre d'autres utilisateurs</h2>
         <form method="post">
             {{input_form.user_to_follow}}
 
@@ -19,12 +19,10 @@
             <tr>
                 <td>{{ subscription.username }}</td>
                 <td class="table-link-td"><a href="{% url 'follow_user_delete' subscription.id  %}">Désabonner</a> </td>
-
             </tr>
         {% endfor %}
         </table>
 
-        
         <h2>Abonnés</h2>
         <table>
         {% for subscriber in subscribers %}

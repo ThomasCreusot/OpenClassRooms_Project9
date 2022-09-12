@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <!--Not mandatory : if the user is already authenticated, he/she does not have access to signup and login-->
     {% if user.is_authenticated %}
         <p>Bonjour {{ user.username }}, vous êtes déja connectés, Merci de revenir à la page d'accueil</p>
         <button><a href="{% url 'home' %}">Accueil</a></button>
@@ -20,4 +19,5 @@
         </form>
         </div>
     {% endif %}
+
 {% endblock content %}

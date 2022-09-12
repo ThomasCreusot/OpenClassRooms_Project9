@@ -1,0 +1,14 @@
+{% load reviews_app_extras %}
+
+<p class="ticket--user_asks_review">Critique demandée par {% get_poster_display ticket.user %}</p>
+<!--old version : <p class="ticket--user_asks_review">{{ instance.user }} a demandé une critique</p>-->
+
+<p class="time_created">{{ ticket.time_created|get_posted_at_display }}</p>
+<!--<p class="time_created">{{ instance.time_created }}</p>-->
+
+<p class="ticket--title"> {{ ticket.title }} </p>
+<p>{{ ticket.description }}</p>
+
+{% if ticket.image %}
+    <img src="{{ ticket.image.url }}">
+{% endif %}

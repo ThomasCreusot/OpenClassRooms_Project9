@@ -1,20 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Créer un nouveau ticket</h2>
-    <form class="ticket-creation-form" method="post" enctype="multipart/form-data">
-        <p>Titre</p>
-        {{ form.title }}
-        <p></p>
-        {{ form.description.label }}
-        {{ form.description }}
-        <p></p>
-        {{ form.image.label }}
-        {{ form.image }}
 
+    <form class="ticket-creation-form" method="post" enctype="multipart/form-data">
+
+        {% include 'reviews_app/partials/ticket_modification_snippet.html' with instance=instance %}
         {% csrf_token %}
+        <br>
         <button type="submit" >Envoyer</button>
+
     </form>
 
 {% endblock %}
-
-

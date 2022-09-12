@@ -1,9 +1,15 @@
+/*==============================*/
 /*========== ALL WEBSITE ==========*/
 
 /*Default font*/
 *{
-    font-family: 'trebuchet MS', georgia, sans-serif; /* 'lane_-_narrowregular' deleted --> bug in console*/
+    font-family: 'trebuchet MS', georgia, sans-serif;  
     color: rgb(50, 50, 50);
+}
+
+h2
+{
+    text-align: center;
 }
 
 
@@ -26,77 +32,19 @@ header
     border-style: solid;
 }
 
-
-/*==============================*/
-/*========== HOMEPAGE ==========*/
-#homepage
+#head_title
 {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    /*Allignement
-    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
-    justify-content: space-around;
-
-    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
-    align-items: center;
-
-    /*Display borders for testing*/
-    /*border-width: 2px;
-    border-color:  rgb(200,200,200);
-    border-style: solid;*/
+    text-align: center;
+    font-weight: bold;
 }
 
-#homepage__signup, #homepage__login
+.head_space
 {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
-    /*Allignement
-    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
-    justify-content: center;
-
-    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
-    align-items: center;
-
-
-    padding-top: 5%;
-    
-
-    /*Display borders for testing*/
-    /*border-width: 1px;
-    border-color:  rgb(200,200,200);
-    border-style: solid;*/
+    width: 30%;
 }
 
 
-
-/*==============================*/
-/*========== TEST ON FORMS ==========*/
-.helptext, #signup_form ul li
-{
-    color: rgb(150, 150, 150);
-    font-size: 0.8em;
-}
-
-
-
-#signup_form, #follow_user_form
-{
-    display: flex;
-    flex-direction : column;
-    flex-wrap: wrap;
-
-    /*Allignement
-    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
-    justify-content: center;
-
-    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
-    align-items: center;
-}
-
+/*Navigation menu*/
 nav
 {
     display: flex;
@@ -118,6 +66,81 @@ nav a
     font-size: 0.8em;
 }
 
+
+
+/*==============================*/
+/*========== HOMEPAGE (login.html) ==========*/
+
+#homepage
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    /*Allignement
+    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
+    justify-content: space-around;
+
+    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
+    align-items: center;
+
+    /*Display borders for testing*/
+    /*border-width: 2px;
+    border-color:  rgb(200,200,200);
+    border-style: solid;*/
+}
+
+
+#homepage__signup, #homepage__login
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    /*Allignement
+    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
+    justify-content: center;
+
+    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
+    align-items: center;
+
+    padding-top: 5%;
+    
+    /*Display borders for testing*/
+    /*border-width: 1px;
+    border-color:  rgb(200,200,200);
+    border-style: solid;*/
+}
+
+
+
+/*==============================*/
+/*========== SIGN-UP PAGE ==========*/
+
+#signup_form
+{
+    display: flex;
+    flex-direction : column;
+    flex-wrap: wrap;
+
+    /*Allignement
+    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
+    justify-content: center;
+
+    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
+    align-items: center;
+}
+
+.helptext, #signup_form ul li
+{
+    color: rgb(150, 150, 150);
+    font-size: 0.8em;
+}
+
+
+/*==============================*/
+/*========== BUTTONS ==========*/
+
 button
 {
     background-color:  rgb(255,255,255);
@@ -125,11 +148,15 @@ button
     border-color: rgb(0,0,0);
 }
 
-a{
+button a
+{
     text-decoration: none;    
-
 }
 
+
+
+/*==============================*/
+/*========== HOME PAGE (home.html and my_posts.html) ==========*/
 
 #homeblocpage
 {
@@ -144,7 +171,8 @@ a{
     align-items: center;
 }
 
-.ticket, .review
+
+#homeblocpage .ticket, #homeblocpage .review
 {
     width: 55%;
 
@@ -154,90 +182,48 @@ a{
     border-style: solid;
 
     margin-top: 2%;
-       
+
+    padding: 1% 1% 1% 1%;
 }
 
 
-
-.ticket-in-review
+#homeblocpage .ticket
 {
-    width: 80%;
-
-    /*Display borders for testing*/
-    border-width: 1px;
-    border-color:  rgb(50, 50, 50);
-    border-style: solid;
-
-    margin: auto;
+    background-color: rgb(255,245,245);       
 }
 
-.ticket p, .ticket img, .review p, .ticket-in-review img, .ticket-in-review p
+#homeblocpage .review
 {
-    margin-left: 2%;
+    background-color: rgb(245, 255, 245);       
 }
 
-.ticket_and_review-ticket_part img
+#homeblocpage .review .ticket-in-review
 {
-    width: 50%;
-}
-
-.time_created
-{
-    text-align: right;
-    font-size: 0.8em;
+    background-color: rgb(245, 245, 255);       
 }
 
 
-
-table, .table-link-td
-{
-    border-width: 1px;
-    border-color:  rgb(100, 100, 100);
-    border-style: solid;
-}
-
-#head_title
-{
-    text-align: center;
-    font-weight: bold;
-}
-
-.head_space
-{
-    width: 30%;
-}
-
-#ticket_and_review_creation
+#homeblocpage #ticket_and_review_creation
 {
     width: 55%; /*as for .ticket, and .review width*/
 
     display: flex;
     flex-direction : row;
-
     /*Allignement
     Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
     justify-content: space-around;
-
     /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
     align-items: center;
 }
-#ticket_and_review_creation button
+
+#homeblocpage #ticket_and_review_creation button
 {
     width: 30%;
 }
 
-.time_created, .user_answers_review, .ticket--user_asks_review
-{
-    padding: 0;
-    margin: 0;
-}
 
-.ticket--title, .review--headline
-{
-    font-weight: bold;
-}
 
-.ticket
+#homeblocpage .ticket 
 {
     display: flex;
     flex-direction : column;
@@ -248,97 +234,141 @@ table, .table-link-td
 
     /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
     align-items: flex-start;
+
 }
 
-.button--answer_a_ticket
+#homeblocpage .ticket *, #homeblocpage .review *
+{
+    margin-left: 3%;
+}
+
+#homeblocpage .ticket .button--answer_a_ticket
 {
     margin-top: 1%;
     margin-bottom: 1%;
-    margin-left: 10%;
-    
+    margin-left: 80%;
+}
+
+.ticket .ticket--user_asks_review, .ticket .time_created, .review .ticket--user_asks_review, .review .time_created
+{
+    padding: 0;
+    margin: 0;
+}
+
+.ticket .time_created, .review .time_created
+
+{
+    text-align: right;
+    font-size: 0.8em;
     align-self: flex-end;
 }
 
-.ticket .time_created
+.ticket .ticket--title, .review .review--headline
 {
-align-self: flex-end;
+        font-weight: bold;
 }
 
-h2
+
+.review .ticket-in-review
 {
-    margin-top: 5%;
-    text-align: center;
+    width: 80%;
+
+    /*Display borders for testing*/
+    border-width: 1px;
+    border-color:  rgb(50,50,50);
+    border-style: solid;
+    /*margin: auto;*/
+    
 }
 
-table
-{
-    width: 60%;
-}
 
-.table-link-td
-{
-    width: 20%;
-    text-align: center;
-}
-
-.ticket-creation-form
+#homeblocpage .ticket .ticket-buttons, #homeblocpage .review .review-buttons
 {
     width: 80%;
 
     display: flex;
-    flex-direction : column;
+    flex-direction : row;
 
     /*Allignement
     Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
-    justify-content: space-between;
-
-    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
-    align-items: stretch
-}
-
-.ticket-creation-form button
-{
-    width: 20%;
-    align-self:flex-end;
-}
-
-
-
-.ticket_and_review-review_part, .ticket_and_review-ticket_part
-{
-    margin: auto;
-    width: 80%;
-
-    display: flex;
-    flex-direction : column;
-
-    /*Allignement
-    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
-    justify-content: space-between;
+    justify-content: space-around;
 
     /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
     align-items: center;
 
+    margin-top: 1%;
+}
+
+
+
+
+/*==============================*/
+/*========== TICKETS =====*/
+
+
+.ticket-creation-form, .ticket-update-form
+{
+    width: 60%;
+    margin: auto;
+
     border-width: 1px;
-    border-color:  rgb(100, 100, 100);
+    border-color:  rgb(50,50,50);
+    border-style: solid;
+    padding-left: 3%;
+    padding-bottom: 1%;
+
+    background-color: rgb(255,245,245);    
+}
+
+.ticket-modification-form_snippet
+{
+    width: 100%;
+
+    display: flex;
+    flex-direction : column;
+
+    /*Allignement
+    Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
+    justify-content: space-around;
+    /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
+    align-items: flex-start;
+}
+
+
+.review-creation-form, .review-update-form 
+{
+    width: 60%;
+    margin: auto;
+
+    border-width: 1px;
+    border-color:  rgb(50,50,50);
     border-style: solid;
 
-    padding-bottom: 3%;
+    padding-left: 3%;
+
+    padding-bottom: 1%;
+
+    background-color: rgb(245, 255, 245);    
 }
 
-.ticket_and_review-review_part *, .ticket_and_review-ticket_part *
+
+#review_and_ticket_creation .ticket, #review_creation_for_ticket .ticket, #review_update_for_ticket .ticket
 {
-    width: 90%;
+    background-color: rgb(245,245,255);  
+    width: 60%;     
+    margin: auto;
+    padding-left: 3%;
+    padding-top: 1%;
+
+    border-width: 1px;
+    border-color:  rgb(50,50,50);
+    border-style: solid;
 }
 
-.ticket_and_review-review_part button
-{
-    width: 20%;
-    align-self: flex-end;
-    margin: 3% 5% 3% 0% 
-    
-}
 
+
+/*==============================*/
+/*=== RATING RADIO BUTTONS ===*/
 .review_rating_choice 
 {
     width: 80%;
@@ -363,17 +393,48 @@ table
 
 
 
+/*==============================*/
+/*========== FOLLOWERS PAGE ==========*/
 
-.ticket-buttons, .review-buttons
+table, .table-link-td
 {
+    border-width: 1px;
+    border-color:  rgb(100, 100, 100);
+    border-style: solid;
+}
+
+
+table
+{
+    width: 60%;
+}
+
+.table-link-td
+{
+    width: 20%;
+    text-align: center;
+
+}
+
+#follow_user_form
+{
+    width: 100%;
 
     display: flex;
-    flex-direction : row;
+    flex-direction : column;
 
     /*Allignement
     Principal axis : justify-content : flex-start/ flex-end/ center/ space-between/ space-around*/
     justify-content: space-around;
-
     /*Secondary axis : align-items : stretch /flex-start /flex-end /center/baseline*/
     align-items: center;
+
+}
+
+/*==============================*/
+/*========== PICTURES ==========*/
+
+img 
+{
+    max-width: 80%;
 }

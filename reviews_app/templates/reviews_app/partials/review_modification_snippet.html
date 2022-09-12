@@ -1,0 +1,23 @@
+
+    <form action="" method="post" novalidate>
+        <div class="ticket_and_review-review_part"> 
+            <p>Titre</p>
+            {{ form.headline }}
+            <p>Note</p>
+
+
+            {{ form.rating }}  
+            <div class = "review_rating_choice">
+                {{ form.rating_choice_field }}  
+            </div>
+
+            <p>Commentaire</p>
+            {{ form.body }}
+
+
+            {% csrf_token %}
+
+            <button type="submit" >Envoyer</button>
+
+        </div>
+    </form>

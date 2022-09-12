@@ -1,40 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
+<div id = "review_and_ticket_creation">
     <h2>Créer une critique</h2>
+
     <form method="post" enctype="multipart/form-data">
 
-        <div class="ticket_and_review-ticket_part">
-            <p>Livre/Article</p>
-            <p>Titre</p>
-            {{ ticket_form.title }}
-
-            <p>Description</p>
-            {{ ticket_form.description }}
-
-            <p>Image</p>
-            {{ ticket_form.image }}
+        <div class="ticket-creation-form">
+        {% include 'reviews_app/partials/ticket_modification_snippet.html' with form=ticket_form %}
         </div>
 
-        <div class="ticket_and_review-review_part"> 
-            <p>Critique</p>
-            <p>Titre</p>
-            {{ review_form.headline }}
-            <p>Note</p>
-
-
-            {{ review_form.rating }}  
-            <div class = "review_rating_choice">
-                {{ review_form.rating_choice_field }}  
-            </div>
-
-            <p>Commentaire</p>
-            {{ review_form.body }}
-
-
-            {% csrf_token %}
-            <button type="submit" >Envoyer</button>
-
+        <div class="review-creation-form">
+        {% include 'reviews_app/partials/review_modification_snippet.html' with form=review_form %}
         </div>
+
+        {% csrf_token %}
+        <!--<button type="submit" >Envoyerr</button>-->
+
     </form>
-
+</div>
 {% endblock content %}
