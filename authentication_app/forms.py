@@ -12,5 +12,4 @@ class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         # get_user_model() allows to get the User model without importing it directly
         model = get_user_model()
-        #fields = ('username', 'email', 'first_name', 'last_name')
         fields = ('username',)

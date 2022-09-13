@@ -1,12 +1,9 @@
 {% load reviews_app_extras %}
 
 <p class="ticket--user_asks_review">Critique postée par {% get_poster_display review.user %}</p>
-<!--old version : <p class="user_answers_review">{{ instance.user }} a posté une critique</p>-->
-
 <p class="time_created">{{ review.time_created|get_posted_at_display }}</p>
-<!--<p class="time_created">{{ instance.time_created }}</p>-->
-
 <p class="review--headline" >{{ review.headline }} {{ review.rating }} </p>
+
 <p>{{ review.body }}</p>
 
 <div class="ticket-in-review">

@@ -1,3 +1,18 @@
+/*__PLAN__*/
+/*
+_ALL WEBSITE
+_HOMEPAGE (login.html)
+_SIGN-UP PAGE
+_BUTTONS 
+_HOME PAGE (home.html and my_posts.html) 
+_TICKETS 
+_RATING RADIO BUTTONS
+_FOLLOWERS PAGE
+_PICTURES 
+*/
+
+
+
 /*==============================*/
 /*========== ALL WEBSITE ==========*/
 
@@ -216,11 +231,11 @@ button a
     align-items: center;
 }
 
+
 #homeblocpage #ticket_and_review_creation button
 {
     width: 30%;
 }
-
 
 
 #homeblocpage .ticket 
@@ -301,10 +316,8 @@ button a
 
 
 
-
 /*==============================*/
 /*========== TICKETS =====*/
-
 
 .ticket-creation-form, .ticket-update-form
 {
@@ -334,7 +347,6 @@ button a
     align-items: flex-start;
 }
 
-
 .review-creation-form, .review-update-form 
 {
     width: 60%;
@@ -350,7 +362,6 @@ button a
 
     background-color: rgb(245, 255, 245);    
 }
-
 
 #review_and_ticket_creation .ticket, #review_creation_for_ticket .ticket, #review_update_for_ticket .ticket
 {
@@ -369,6 +380,7 @@ button a
 
 /*==============================*/
 /*=== RATING RADIO BUTTONS ===*/
+
 .review_rating_choice 
 {
     width: 80%;
@@ -403,7 +415,6 @@ table, .table-link-td
     border-style: solid;
 }
 
-
 table
 {
     width: 60%;
@@ -430,6 +441,8 @@ table
     align-items: center;
 
 }
+
+
 
 /*==============================*/
 /*========== PICTURES ==========*/

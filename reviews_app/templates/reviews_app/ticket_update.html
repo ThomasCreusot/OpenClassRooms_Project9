@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <h2>Modifier votre ticket</h2>
 
     <form class="ticket-update-form" method="post" enctype="multipart/form-data">
-
         {% include 'reviews_app/partials/ticket_modification_snippet.html' with form=form %}
 
         {% if ticket.image %}
@@ -13,11 +13,7 @@
         {% csrf_token %}
         <br>
         <button type="submit" >Envoyer</button>
-
     </form>
-
-
-
 {% endblock %}
 
 

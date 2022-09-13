@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div id = "review_update_for_ticket">
-    <h2>Modifier votre critique</h2>
+    <div id = "review_update_for_ticket">
+        <h2>Modifier votre critique</h2>
 
-    <p>Vous êtes en train de poster en réponse à</p>
+        <p>Vous êtes en train de poster en réponse à</p>
 
-    <div class="ticket">
-        {% include 'reviews_app/partials/ticket_snippet.html' with ticket=ticket %}
+        <div class="ticket">
+            {% include 'reviews_app/partials/ticket_snippet.html' with ticket=ticket %}
+        </div>
+
+        <div class="review-update-form">
+            {% include 'reviews_app/partials/review_modification_snippet.html' with instance=instance %}
+        </div>
     </div>
-
-    <div class="review-update-form">
-        {% include 'reviews_app/partials/review_modification_snippet.html' with instance=instance %}
-    </div>
-
-</div>
-
 {% endblock %}
 
 

@@ -10,7 +10,6 @@
     </head>
 
     <body>
-
         <header>
             <div class="head_space"></div> <!--div for spacing with flexbox-->
             <p id="head_title" class="head_space">LiTReview</p>
@@ -22,10 +21,11 @@
                     <a href="{% url 'follow_users' %}">Abonnements</a>
                     <a href="{% url 'logout' %}">Se déconnecter</a>
                 </nav>
+
             {% else %}
                 <div class="head_space"></div> <!--div for spacing with flexbox-->
-            {% endif %}
 
+            {% endif %}
         </header>
 
         {% block content %}{% endblock content %}

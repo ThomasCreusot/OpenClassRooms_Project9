@@ -4,12 +4,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.views.generic import View
 from django.conf import settings  # access to LOGIN_REDIRECT_URL
 
-
-
-# Create your views here.
-
 # Login page : based on functions
-# ->Modification of urls.py: path('', authentication_app.views.login_page, name='login'), # '' because at root the of the project
+# ->Modification of urls.py: path('', authentication_app.views.login_page, name='login'), 
+# -->'' because at root the of the project
 """
 def login_page(request):
     form = forms.LoginForm()
@@ -26,12 +23,15 @@ def login_page(request):
                 return redirect('home')  # Link between authentication_app and reviews_app
             else:
                 message = 'Identifiants invalides.'
-    return render(request, 'authentication_app/login.html', context={'form': form, 'message': message})
+    return render(request, 'authentication_app/login.html', context={'form': form,
+                  'message': message})
 """
 
 # Login page : based on class 
 # ->Modification of urls.py: path('', authentication.views.LoginPageView.as_view(), name='login'),
 class LoginPageView(View):
+    """Represents the view of the login page"""
+    
     template_name = 'authentication_app/login.html'
     form_class = forms.LoginForm
 
@@ -60,6 +60,8 @@ def logout_user(request):
 
 
 def signup_page(request):
+    """Represents the sign up page"""
+
     form = forms.SignupForm()
     if request.method == 'POST':
         form = forms.SignupForm(request.POST)
