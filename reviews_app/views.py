@@ -16,6 +16,8 @@ from . import models
 
 @login_required
 def home(request):
+    """Return an objetHttpResponse corresponding to the home page"""
+
     # Limit displayed reviews to the tickets by followed users
     reviews = models.Review.objects.filter(
         # the user can see the reviews writen by users he/she follows
@@ -59,6 +61,8 @@ def home(request):
 
 @login_required
 def ticket_create(request):
+    """Return an objetHttpResponse corresponding to the ticket creation page"""
+
     if request.method == 'POST':
         form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
@@ -78,6 +82,8 @@ def ticket_create(request):
 
 @login_required
 def review_and_ticket_upload(request):
+    """Return an objetHttpResponse corresponding to the ticket and review creation page"""
+
     review_form = ReviewForm()
     ticket_form = TicketForm()
 
@@ -107,6 +113,8 @@ def review_and_ticket_upload(request):
 
 @login_required
 def review_for_a_given_ticket_create(request, ticket_id):
+    """Return an objetHttpResponse corresponding to the review creation page"""
+
     ticket = models.Ticket.objects.get(id=ticket_id)  
 
     if request.method == 'POST':
@@ -131,6 +139,8 @@ def review_for_a_given_ticket_create(request, ticket_id):
 
 @login_required
 def follow_users(request):
+    """Return an objetHttpResponse corresponding to the page dedicated to following users"""
+
     # Added because the client wishes to have an inputField and not a manyToMany field
     input_form = FollowUsersForm_input(initial={'user_to_follow': "Nom d'utilisateur"})
 
@@ -176,6 +186,9 @@ def follow_users(request):
 
 @login_required
 def my_posts(request):
+    """Return an objetHttpResponse corresponding to the page which displays posts of the connected
+    user"""
+
     my_reviews = models.Review.objects.filter(user=request.user)
     my_tickets = models.Ticket.objects.filter(user=request.user)
 
@@ -193,6 +206,8 @@ def my_posts(request):
 
 @login_required
 def ticket_update(request, ticket_id):
+    """Return an objetHttpResponse corresponding to the ticket update page"""
+
     ticket = models.Ticket.objects.get(id=ticket_id)  
 
     if request.method == 'POST':
@@ -208,6 +223,8 @@ def ticket_update(request, ticket_id):
 
 @login_required
 def review_update(request, review_id):
+    """Return an objetHttpResponse corresponding to the review update page"""
+
     review = models.Review.objects.get(id=review_id)  
     ticket = review.ticket
 
@@ -226,6 +243,8 @@ def review_update(request, review_id):
 
 @login_required
 def ticket_delete(request, ticket_id):
+    """Return an objetHttpResponse corresponding to the ticket deletion page"""
+
     ticket = models.Ticket.objects.get(id=ticket_id)  
 
     if request.method == 'POST':
@@ -237,6 +256,8 @@ def ticket_delete(request, ticket_id):
 
 @login_required
 def review_delete(request, review_id):
+    """Return an objetHttpResponse corresponding to the review deletion page"""
+
     review = models.Review.objects.get(id=review_id)  
 
     if request.method == 'POST':
@@ -248,6 +269,8 @@ def review_delete(request, review_id):
 
 @login_required
 def follow_user_delete(request, followed_user_id):
+    """Return an objetHttpResponse corresponding to the following relation deletion page"""
+
     followed_user = User.objects.get(id=followed_user_id)  
     ConnectedUser_FollowedUser_relation = UserFollows.objects.get(user = request.user,
                                                                   followed_user = followed_user)  

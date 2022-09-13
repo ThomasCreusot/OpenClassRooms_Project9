@@ -7,7 +7,7 @@
 <p>{{ review.body }}</p>
 
 <div class="ticket-in-review">
-    <p>Ticket - {% get_poster_display instance.user %}</p> 
+    <p>Ticket - {% get_poster_display review.ticket.user %}</p> 
     <p>{{ review.ticket.title }}</p>
     {% if review.ticket.image %}
         <img src="{{ review.ticket.image.url }}">

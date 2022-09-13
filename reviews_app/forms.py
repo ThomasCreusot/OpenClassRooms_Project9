@@ -7,15 +7,19 @@ from django.contrib.auth import get_user_model
 
 
 class TicketForm(forms.ModelForm):
-   class Meta:
-     model = Ticket
-     # exclusion of user field, as it is the connected user by default (see views.py) 
-     exclude = ('user',)
+    """Reprensents a form to create a ticket"""
+
+    class Meta:
+        model = Ticket
+        # exclusion of user field, as it is the connected user by default (see views.py) 
+        exclude = ('user',)
 
 
 class ReviewForm(forms.ModelForm):
-    rating_CHOICES = [('0', '-0'), ('1', '-1'), ('2', '-2'), ('3', '-3'), ('4', '-4'), ('5', '-5')]
-    rating_choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=rating_CHOICES)
+    """Reprensents a form to create a review"""
+
+    RATING_CHOICES = [('0', '-0'), ('1', '-1'), ('2', '-2'), ('3', '-3'), ('4', '-4'), ('5', '-5')]
+    rating_choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=RATING_CHOICES)
 
     class Meta:
         model = Review
@@ -27,11 +31,13 @@ class ReviewForm(forms.ModelForm):
 # https://docs.djangoproject.com/fr/4.1/topics/forms/modelforms/
 # the Field 'follows' is a ManyToManyField, then, by default, ModelMultipleChoiceField in the form
 
-User = get_user_model()
+user_model = get_user_model()
 
 class FollowUsersForm(forms.ModelForm):
+    """Reprensents a form which allows to follow users"""
+
     class Meta:
-        model = User
+        model = user_model
         fields = ['follows']
         # follows field excluded as widgets = {'follows': forms.TextInput} does not work: 
         # need an input form
@@ -40,4 +46,5 @@ class FollowUsersForm(forms.ModelForm):
  
 class FollowUsersForm_input(forms.Form):
     """Role: get an input field and not a many to many field"""
+
     user_to_follow = forms.CharField(max_length=100)

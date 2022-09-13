@@ -8,6 +8,8 @@ from PIL import Image
 # IN CASE OF MODIFICATION, DO NOT FORGET TO MAKEMIGRATIONS + MIGRATE in django shell
 
 class Ticket(models.Model):
+    """Represents a ticket"""
+
     IMAGE_MAX_SIZE = (300, 300)
 
     title = models.CharField(max_length=128)
@@ -28,6 +30,8 @@ class Ticket(models.Model):
 
 
 class Review(models.Model):
+    """Represents a review"""
+
     ticket = models.ForeignKey(to=Ticket, on_delete=models.CASCADE)
     rating = models.PositiveSmallIntegerField(
         # validates that rating must be between 0 and 5
@@ -40,6 +44,8 @@ class Review(models.Model):
 
 
 class UserFollows(models.Model):
+    """Represents the relation between an user who follows another user"""
+
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
                             related_name='following')
     followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,

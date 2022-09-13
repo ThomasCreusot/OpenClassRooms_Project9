@@ -30,7 +30,7 @@ def login_page(request):
 # Login page : based on class 
 # ->Modification of urls.py: path('', authentication.views.LoginPageView.as_view(), name='login'),
 class LoginPageView(View):
-    """Represents the view of the login page"""
+    """Return an objetHttpResponse corresponding to the login page"""
     
     template_name = 'authentication_app/login.html'
     form_class = forms.LoginForm
@@ -55,12 +55,14 @@ class LoginPageView(View):
 
 
 def logout_user(request):
+    """Logs out an user"""
+
     logout(request)
     return redirect('login')
 
 
 def signup_page(request):
-    """Represents the sign up page"""
+    """Return an objetHttpResponse corresponding to the sign up page"""
 
     form = forms.SignupForm()
     if request.method == 'POST':
@@ -71,3 +73,5 @@ def signup_page(request):
             login(request, user)
             return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'authentication_app/signup.html', context={'form': form})
+
+

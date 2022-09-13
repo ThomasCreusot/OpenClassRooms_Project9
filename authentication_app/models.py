@@ -3,12 +3,11 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    """Represents a User"""
+    """Represents an User"""
     # We just got Users, without any specific 'Role' (as 'creator' or 'subscriber')
     # Cours OC : "Pour établir une relation plusieurs-à-plusieurs entre les utilisateurs, vous
     # devez spécifier un  ManyToManyField  sur le modèle  User, qui lie à un autre  User. Appelons
     # ce champ 'follows' (suit)"
-
 
     follows = models.ManyToManyField(
         'self',
